@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import video from '../data/video.js';
-import Typography from '@material-ui/core/Typography';
 import CommentList from './CommentList.js';
 import VotingButtons from './VotingButtons.js';
+import { Button, Typography } from '@material-ui/core';
 
 function App() {
   console.log("Here's your data:", video);
@@ -31,8 +31,18 @@ function App() {
         isHidden={isHidden}
         setIsHidden={setIsHidden}
       />
+      <Button
+        className="hideComments"
+        type="button"
+        color="primary"
+        variant="outlined"
+        onClick={() => setIsHidden(!isHidden)}
+      >
+        {isHidden === true ? 'Show' : 'Hide'} Comments
+      </Button>
       <hr />
-      <CommentList comments={video.comments} />
+
+      {!isHidden && <CommentList comments={video.comments} />}
     </div>
   );
 }

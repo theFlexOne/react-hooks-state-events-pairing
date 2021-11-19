@@ -1,8 +1,8 @@
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const VotingButtons = ({ upvotes, downvotes, setIsHidden, isHidden }) => {
+const VotingButtons = ({ upvotes, downvotes }) => {
   let [liveUpvotes, setLiveUpvotes] = useState(upvotes);
   let [liveDownvotes, setLiveDownvotes] = useState(downvotes);
 
@@ -14,37 +14,26 @@ const VotingButtons = ({ upvotes, downvotes, setIsHidden, isHidden }) => {
   };
 
   return (
-    <div>
-      <ButtonGroup className="VotingButtons">
-        <Button
-          className="upvote"
-          type="button"
-          color="secondary"
-          variant="outlined"
-          onClick={handleUpvote}
-        >
-          {liveUpvotes} &#128077;
-        </Button>
-        <Button
-          className="downvote"
-          type="button"
-          color="secondary"
-          variant="outlined"
-          onClick={handleDownvote}
-        >
-          {liveDownvotes} &#128078;
-        </Button>
-      </ButtonGroup>
-      <br />
+    <ButtonGroup className="VotingButtons">
       <Button
-        className="hideComments"
+        className="upvote"
         type="button"
-        color="primary"
+        color="secondary"
         variant="outlined"
+        onClick={handleUpvote}
       >
-        {isHidden === true ? 'Show' : 'Hide'} Comments
+        {liveUpvotes} &#128077;
       </Button>
-    </div>
+      <Button
+        className="downvote"
+        type="button"
+        color="secondary"
+        variant="outlined"
+        onClick={handleDownvote}
+      >
+        {liveDownvotes} &#128078;
+      </Button>
+    </ButtonGroup>
   );
 };
 
