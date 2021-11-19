@@ -3,6 +3,7 @@ import Comment from './Comment.js';
 
 const Comments = ({ comments }) => {
   const [liveComments, setLiveComments] = useState(comments);
+  const [userSearch, setUserSearch] = useState('');
 
   const handleDeletingComment = id => {
     setLiveComments(
@@ -15,11 +16,25 @@ const Comments = ({ comments }) => {
     );
   };
 
+  const handleCommentSearch = e => {
+    setUserSearch(e.target.value);
+    setLiveComments(
+      liveComments.filter(comment => {
+        if (userSearch === '') return true;
+        if (comment.user.includes(userSearch)) return true;
+        return false;
+      })
+    );
+  };
+
+  const commentsToDisplay = [...liveComments];
+
   return (
     <div>
-      <h3>{liveComments.length} Comments</h3>
+      <input type="search" value={userSearch} onChange={handleCommentSearch} />
+      <h3>{commentsToDisplay.length} Comments</h3>
       <ol className="Comments" style={{ listStyle: 'none' }}>
-        {liveComments.map(({ comment, user, id }) => {
+        {commentsToDisplay.map(({ comment, user, id }) => {
           return (
             <Comment
               id={id}
